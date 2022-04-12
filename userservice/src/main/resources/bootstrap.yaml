@@ -1,0 +1,36 @@
+server:
+  port: 16001
+
+spring:
+  application:
+    name: userservice
+  cloud:
+    config:
+      name: userservice #选择的配置文件
+      profile: dev #当前激活的配置环境，常写的有prod、dev等
+      uri: http://localhost:15002 # Config server的uri
+      label: master
+
+
+#
+#  cloud:
+#    config:
+#      name: userservice
+#      profile: dev
+#      uri: http://localhost:15002
+
+
+eureka:
+  instance:
+    hostname: cloud-user-service
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:15000/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
