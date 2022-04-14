@@ -9,8 +9,7 @@ spring:
       name: userservice #选择的配置文件
       profile: dev #当前激活的配置环境，常写的有prod、dev等
       uri: http://localhost:15002 # Config server的uri
-      label: master
-
+      default-label: master
 
 #
 #  cloud:
@@ -22,7 +21,8 @@ spring:
 
 eureka:
   instance:
-    hostname: cloud-user-service
+    hostname: userservice
+    prefer-ip-address: true
   client:
     fetch-registry: true
     register-with-eureka: true

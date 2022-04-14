@@ -1,0 +1,28 @@
+package com.example.userservice.filter;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+
+@Component
+public class GlobalInterceptor implements HandlerInterceptor {
+//    @Autowired
+//    RedisUtil redisUtil;
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object obj) throws Exception {
+        String secretKey = request.getHeader("from");
+        if(!StringUtils.isNotBlank(secretKey)||secretKey.equals("gateway")){
+            response.setContentType("application/json; charset=utf-8");
+            PrintWriter writer = response.getWriter();
+            writer.write("error");
+            return false;
+        }
+        return true;
+    }
+}
