@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RefreshScope
 @RequestMapping("/user")
+
 public class UserController {
     @Autowired
     RedisUtil redisUtil;

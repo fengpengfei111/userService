@@ -1,5 +1,6 @@
 package com.example.userservice.filter;
 
+import com.example.userservice.util.RedisUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
@@ -12,12 +13,13 @@ import java.io.PrintWriter;
 
 @Component
 public class GlobalInterceptor implements HandlerInterceptor {
-//    @Autowired
-//    RedisUtil redisUtil;
+    @Autowired
+    RedisUtil redisUtil;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object obj) throws Exception {
         String secretKey = request.getHeader("from");
-        if(!StringUtils.isNotBlank(secretKey)||secretKey.equals("gateway")){
+        if (!StringUtils.isNotBlank(secretKey) || secretKey.equals(redisUtil.get("gateway                            "))) {
             response.setContentType("application/json; charset=utf-8");
             PrintWriter writer = response.getWriter();
             writer.write("error");
