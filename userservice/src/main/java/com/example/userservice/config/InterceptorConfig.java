@@ -21,5 +21,4 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
                 .excludePathPatterns("/static/**");  // 静态资源过滤
         super.addInterceptors(registry);
     }
-
 }
