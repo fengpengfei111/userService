@@ -1,21 +1,18 @@
 server:
   port: 16001
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    publisher-confirm-type: correlated # 确认模式 confirm
+    publisher-returns: true
+    listener:
+      simple:
+        acknowledge-mode: manual # 消费者手动确认消息
 
-spring:
-  application:
-    name: userservice
-  cloud:
-    config:
-      name: userservice #选择的配置文件
-      profile: dev #当前激活的配置环境，常写的有prod、dev等
-      uri: http://localhost:15002 # Config server的uri
-      default-label: master
- #
-#  cloud:
-#    config:
-#      name: userservice
-#      profile: dev
-#      uri: http://localhost:15002
+
   redis:
     # Redis本地服务器地址，注意要开启redis服务，即那个redis-server.exe
     host: 127.0.0.1
@@ -31,10 +28,6 @@ spring:
         max-wait: -1
         # 连接池中的最大空闲连接
         max-idle: 8
-
-
-
-
 eureka:
   instance:
     hostname: userservice
@@ -50,6 +43,23 @@ management:
     web:
       exposure:
         include: refresh
+
+
+spring:
+  application:
+    name: userservice
+  cloud:
+    config:
+      name: userservice #选择的配置文件
+      profile: dev #当前激活的配置环境，常写的有dev，uat、prod等
+      uri: http://localhost:15002 # Config server的uri
+      default-label: master
+  main:
+    allow-circular-references: true
+
+
+
+
 
 
 

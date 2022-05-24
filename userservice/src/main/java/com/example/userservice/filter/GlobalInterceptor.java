@@ -1,7 +1,8 @@
 package com.example.userservice.filter;
 
 import com.example.userservice.util.RedisUtil;
-import org.apache.commons.lang.StringUtils;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
